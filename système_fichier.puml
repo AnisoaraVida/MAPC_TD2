@@ -10,7 +10,7 @@ Composant <|.. File
 File .> Owner
 Directory .> Owner
 Composant <|.. Directory
-Composant <.. Composite
+Directory <. Composite
 Composant ..> Owner
 Composant <. FSFactory
 Owner <. FSFactory

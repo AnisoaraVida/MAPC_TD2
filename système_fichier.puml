@@ -1,0 +1,93 @@
+@startuml
+
+package td2 {
+
+package systeme{
+
+File <... ComposantType
+Directory <... ComposantType
+Composant <|.. File
+File .> Owner
+Directory .> Owner
+Composant <|.. Directory
+Composant <.. Composite
+Composant ..> Owner
+Composant <. FSFactory
+Owner <. FSFactory
+ComposantType <. FSFactory
+
+abstract class Owner
+abstract class FSFactory
+
+
+
+interface Composant{
++ getName() : string
++ getSize() : double
++ getOwner() : Owner
++ getContent() : string
++ appendContent(String name) : void
+}
+
+enum ComposantType {
+FICHIER
+REPERTOIRE
+}
+
+class Composite{
+- liste_fichiers : List<Composant>
++ addChild(Composant c) : void
++ getChildren() : List<Composant>
++ removeChild(Composant c) :  void
++ removeChildren(List<Composant>) : List<Composant>
+}
+
+class File{
+- name : string
+- type : ComposantType
++ getName() : string
++ getSize() : double
++ getOwner() : string
++ appendContent() : string
+}
+
+class Directory{
+- name : string
+- type : ComposantType
++ getName() : string
++ getSize() : double
++ getOwner() : string
++ appendContent() : string
+}
+
+class Owner{
+- name : String
++ getOwner() : string
++ setOwner() : string
+}
+
+class FSFactory{
+- name : string
+- owner : string
++ getName()
++ getOwner()
++ createComponent(name, owner, type : ComposantType)
++ getInstance()
+}
+
+}
+
+package Client {
+
+App ...> FSFactory
+App ...> Owner
+App ...> Composant
+App ...> ComposantType
+
+    class App {
+        + main(String[] args) : void
+    }
+}
+
+}
+@enduml
